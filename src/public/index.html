@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Shopping Cart</h1>
+
+<input id="customerId" data-cy="customer-id" placeholder="Customer ID">
+
+<input id="itemName" data-cy="item-name" placeholder="Item name">
+<input id="itemPrice" data-cy="item-price" placeholder="Price">
+<input id="itemQty" data-cy="item-qty" placeholder="Quantity">
+
+<button id="addItemBtn" data-cy="add-item-btn">Add Item</button>
+<button id="createCartBtn" data-cy="create-cart-btn">Create Cart</button>
+
+<pre id="itemsPreview">[]</pre>
+
+<h2>Cart list</h2>
+<div id="cartList"></div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

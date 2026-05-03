@@ -1,0 +1,80 @@
+### 1. Получить все корзины
+GET http://localhost:3000/api/carts
+
+### 2. Создать новую пустую корзину
+POST http://localhost:3000/api/carts
+Content-Type: application/json
+
+{ "customerId": "user_123" }
+
+### 3. Создать корзину с начальным набором товаров
+POST http://localhost:3000/api/carts
+Content-Type: application/json
+
+{
+  "customerId": "user_456",
+  "items": [
+    {"name": "Monitor", "price": 300, "quantity": 1},
+    {"name": "HDMI Cable", "price": 15, "quantity": 2}
+  ]
+}
+
+### 4. Найти конкретную корзину по ID
+GET http://localhost:3000/api/carts/1
+
+### 5. Попытка найти несуществующую корзину (Ожидается 404)
+GET http://localhost:3000/api/carts/9999
+
+### 6. Удалить корзину целиком
+DELETE http://localhost:3000/api/carts/1
+
+### --- ITEMS MANAGEMENT ---
+
+### 7. Добавить товар в существующую корзину
+POST http://localhost:3000/api/carts/2/items
+Content-Type: application/json
+
+{ "name": "Mouse Pad", "price": 25, "quantity": 1 }
+
+### 8. Получить список товаров конкретной корзины
+GET http://localhost:3000/api/carts/2/items
+
+### 9. Полное обновление данных товара (PUT)
+PUT http://localhost:3000/api/items/2
+Content-Type: application/json
+
+{ "name": "RGB Mouse Pad", "price": 35, "quantity": 1 }
+
+### 10. Изменить только количество товара (PATCH)
+PATCH http://localhost:3000/api/items/2
+Content-Type: application/json
+
+{ "quantity": 3 }
+
+### 11. Удалить конкретный товар
+DELETE http://localhost:3000/api/items/2
+
+### --- VALIDATION & ERROR HANDLING ---
+
+### 12. Ошибка: Добавление товара с пустой ценой
+POST http://localhost:3000/api/carts/2/items
+Content-Type: application/json
+
+{ "name": "Ghost Item", "quantity": 1 }
+
+### 13. Ошибка: Отрицательное количество
+PATCH http://localhost:3000/api/items/3
+Content-Type: application/json
+
+{ "quantity": -5 }
+
+### 14. Ошибка: Неверный формат JSON (битый запрос)
+POST http://localhost:3000/api/carts
+Content-Type: application/json
+
+{ "customerId": "bad_request", "items": [ { "name": "Missing Brace" }]}
+
+### 15. Финальный просмотр всех корзин после тестов
+GET http://localhost:3000/api/carts
+
+POST http://localhost:3000/api/test/reset

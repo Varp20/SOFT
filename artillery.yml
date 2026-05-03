@@ -1,0 +1,32 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 30
+      arrivalRate: 5
+    - duration: 30
+      arrivalRate: 15
+
+scenarios:
+  - name: "Create Random Cart"
+    flow:
+        - post:
+            url: "/api/carts"
+            json:
+              customer_id: 1 # Используй существующий ID
+              items:
+                - name: "Item {{ $randomInt(1, 100) }}"
+                  price: 50
+                  quantity: 1
+              status: "open"
+
+  - name: "Create Static Cart"
+    flow:
+      - post:
+          url: "/api/carts"
+          json:
+            customer_id: 1
+            items:
+              - name: "Phone"
+                price: 100
+                quantity: 1
+            status: "open"
